@@ -1,0 +1,6 @@
+{
+  "telegramBot": {
+            "tgToken": "Tg通知 token（选填，不填请删除 telegramBot 对象）",
+            "tgUserId": "Tg通知 群组Id（选填，不填请删除 telegramBot 对象）"
+        }
+}

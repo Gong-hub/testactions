@@ -23,14 +23,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      
       - uses: actions/checkout@v2
-
       - name: Setup Python
         uses: actions/setup-python@v2
 
-      - name: test
+      - name: Install Requirements
         run: |
-          pip3 install requests
+          pip3 install -r requirements.txt
+
+      - name: test
+        env:
+          CONFIG: ${{secrets.CONFIG}}
+        run: |
+          echo "$CONFIG" > ./config.json
           python3 test.py
 
