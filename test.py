@@ -63,6 +63,7 @@ def main():
     TGbot = readJson()["telegramBot"]
     sendTg(TGbot, scrapy())
 
+
 if __name__ == '__main__':
     main()
 
