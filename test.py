@@ -21,7 +21,7 @@ def scrapy():
     print(response.status_code)
     if response.status_code == 200:
         print(response.text)
-        return response.status_code
+        return response.text
     else:
         return response.status_code
 
