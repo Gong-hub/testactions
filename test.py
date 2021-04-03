@@ -37,11 +37,11 @@ def sendTg(tgBot, content):
         token = tgBot['tgToken']
         chat_id = tgBot['tgUserId']
         #发送内容
-        content = content
-        data = {
-            '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
-        }
-        content = urllib.parse.urlencode(data)
+        content = str(content)
+        # data = {
+        #     '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
+        # }
+        # content = urllib.parse.urlencode(data)
         #TG_BOT的token
         # token = os.environ.get('TG_TOKEN')
         #用户的ID
