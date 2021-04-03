@@ -34,6 +34,7 @@ def sendTg(tgBot, content:str):
         data = {
             '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):content
         }
+        print(data)
         content = urllib.parse.urlencode(data)
         #TG_BOT的token
         # token = os.environ.get('TG_TOKEN')
