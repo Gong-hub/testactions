@@ -44,7 +44,7 @@ def sendTg(tgBot, content:str):
         resp = session.post(url)
         print(resp)
     except Exception as e:
-        print('Tg通知推送异常，原因为:  ' + str(e))
+        print('Tg通知推送异常，原因为: ' + str(e))
 
 def readJson():
     try:
