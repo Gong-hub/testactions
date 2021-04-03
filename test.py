@@ -25,14 +25,14 @@ def scrapy():
     else:
         return response.status_code
 
-def sendTg(tgBot, content:str):
+def sendTg(tgBot, content):
     try:
         token = tgBot['tgToken']
         chat_id = tgBot['tgUserId']
         #发送内容
         content = content
         data = {
-            '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):content
+            '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
         }
         print(data)
         content = urllib.parse.urlencode(data)
