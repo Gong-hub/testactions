@@ -46,6 +46,7 @@ def sendTg(tgBot, content:str):
     except Exception as e:
         print('Tg通知推送异常，原因为: ' + str(e))
 
+
 def readJson():
     try:
         #用户配置信息
