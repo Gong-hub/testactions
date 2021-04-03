@@ -21,11 +21,12 @@ def scrapy():
     response = requests.get("https://www.bilibili.com/v/popular/rank/all",headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text,"html5lib")
-        top100_list = soup.find_all("ul.rank-list")
+        top100_list = soup.select("ul.rank-list")
+        print(top100_list)
         data_list = []
         for item in top100_list:
-            title = item.find("div.info").text
-            author = item.find("i.b-icon.author").text.replace(" ","")
+            title = item.select("div.info").text
+            author = item.select("i.b-icon.author").text.replace(" ","")
             data_list.append({author:title})
         # return response.text
         return data_list
