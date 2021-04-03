@@ -21,7 +21,7 @@ def scrapy():
     print(response.status_code)
     if response.status_code == 200:
         print(response.text)
-        return response.status_code
+        return response.text
     else:
         return response.status_code
 
@@ -40,9 +40,9 @@ def sendTg(tgBot, content):
         # token = os.environ.get('TG_TOKEN')
         #用户的ID
         # chat_id = os.environ.get('TG_USERID')
-        url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&message={content}'
+        url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}'
         session = requests.Session()
-        resp = session.post(url)
+        resp = session.post(url,data={"text":content})
         print(resp)
     except Exception as e:
         print('Tg通知推送异常，原因为: ' + str(e))
