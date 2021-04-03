@@ -19,9 +19,8 @@ def scrapy():
     }
 
     response = requests.get("https://www.bilibili.com/v/popular/rank/all",headers=headers)
-    print(response.status_code)
     if response.status_code == 200:
-        soup = BeautifulSoup(response.text)
+        soup = BeautifulSoup(response.text,"html5lib")
         top100_list = soup.find_all("ul.rank-list")
         data_list = []
         for item in top100_list:
@@ -39,7 +38,9 @@ def sendTg(tgBot, content):
         chat_id = tgBot['tgUserId']
         #发送内容
         content = content
-        data = '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S"))+"\n"+str(content)
+        data = {
+            '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
+        }
         content = urllib.parse.urlencode(data)
         #TG_BOT的token
         # token = os.environ.get('TG_TOKEN')
