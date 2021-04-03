@@ -38,7 +38,11 @@ def sendTg(tgBot, content):
         token = tgBot['tgToken']
         chat_id = tgBot['tgUserId']
         #发送内容
-        content = str(content)
+        # content = str(content)
+        text = ""
+        for item in content:
+            text += item[0]+"   "+item[1]+"\n"
+
         # data = {
         #     '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
         # }
@@ -49,7 +53,7 @@ def sendTg(tgBot, content):
         # chat_id = os.environ.get('TG_USERID')
         url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}'
         session = requests.Session()
-        resp = session.post(url,data={"text":content})
+        resp = session.post(url,data={"text":text})
         print(resp)
     except Exception as e:
         print('Tg通知推送异常，原因为: ' + str(e))
