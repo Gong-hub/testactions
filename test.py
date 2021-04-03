@@ -8,7 +8,8 @@
 
 
 from logging import getLogger
-import requests, json ,urllib ,time, os
+import requests, json ,urllib ,time
+from bs4 import BeautifulSoup
 
 logger = getLogger(__name__)
 logger.info("starting")
@@ -20,8 +21,15 @@ def scrapy():
     response = requests.get("https://www.bilibili.com/v/popular/rank/all",headers=headers)
     print(response.status_code)
     if response.status_code == 200:
-        print(response.text)
-        return response.text
+        soup = BeautifulSoup(response.text)
+        top100_list = soup.find_all("ul.rank-list")
+        data_list = []
+        for item in top100_list:
+            title = item.find("div.info").text
+            author = item.find("i.b-icon.author").text.replace(" ","")
+            data_list.append({author:title})
+        # return response.text
+        return data_list
     else:
         return response.status_code
 
@@ -31,10 +39,7 @@ def sendTg(tgBot, content):
         chat_id = tgBot['tgUserId']
         #发送内容
         content = content
-        data = {
-            '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
-        }
-        print(data)
+        data = '***{} B站top100***'.format(time.strftime("%Y-%m-%d %H:%M:%S"))+"\n"+str(content)
         content = urllib.parse.urlencode(data)
         #TG_BOT的token
         # token = os.environ.get('TG_TOKEN')
@@ -42,7 +47,7 @@ def sendTg(tgBot, content):
         # chat_id = os.environ.get('TG_USERID')
         url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}'
         session = requests.Session()
-        resp = session.post(url,data={"text":content})
+        resp = session.post(url,data={"document":content})
         print(resp)
     except Exception as e:
         print('Tg通知推送异常，原因为: ' + str(e))
