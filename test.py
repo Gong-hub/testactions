@@ -32,7 +32,7 @@ def sendTg(tgBot, content:str):
         #发送内容
         content = content
         data = {
-            '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):content
+            '{}B站top100'.format(time.strftime("%Y-%m-%d %H:%M:%S")):str(content)
         }
         print(data)
         content = urllib.parse.urlencode(data)
