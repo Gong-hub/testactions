@@ -6,4 +6,19 @@
 # @File         : test.py
 # @Software     : PyCharm
 
-print("你好")
+
+from logging import getLogger
+import requests
+
+logger = getLogger(__name__)
+logger.info("starting")
+
+headers = {
+    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
+}
+
+response = requests.get("https://www.bilibili.com/v/popular/rank/all")
+if response.status_code == 200:
+    print(response.text)
+
+
